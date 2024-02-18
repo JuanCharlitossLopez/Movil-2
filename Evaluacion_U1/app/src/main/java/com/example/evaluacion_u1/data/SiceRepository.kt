@@ -15,23 +15,56 @@
  */
 package com.example.evaluacion_u1.data
 
-import com.example.evaluacion_u1.network.SiceApiService
+import android.content.Context
+import android.util.Log
+import com.example.evaluacion_u1.network.AddCookiesInterceptor
+import com.example.evaluacion_u1.network.LoginSICEApiService
+import com.example.evaluacion_u1.network.ReceivedCookiesInterceptor
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import okhttp3.ResponseBody.Companion.toResponseBody
+import org.simpleframework.xml.convert.AnnotationStrategy
+import org.simpleframework.xml.core.Persister
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
-/**
- * Repository that fetch mars photos list from marsApi.
- */
-interface SNRepository {
-    /** Fetches list of MarsPhoto from marsApi */
-    suspend fun acceso(m:String, p:String): String
-}
+class RetrofitClient(context: Context) {
 
+    private val BASE_URL = "https://sicenet.surguanajuato.tecnm.mx"
 
+    private val client = OkHttpClient.Builder()
+        .addInterceptor(AddCookiesInterceptor(context))
+        .addInterceptor(ReceivedCookiesInterceptor(context))
+        .addInterceptor(createLoggingInterceptor())
+        .build()
 
-/**
- * Network Implementation of Repository that fetch mars photos list from marsApi.
- */
-class NetworkSiceRepository(private val snApiService: SiceApiService) : SNRepository {
-    /** Fetches list of MarsPhoto from marsApi*/
-    override suspend fun acceso(m: String, p: String): String { TODO("Not yet implemented")}
+    private fun createLoggingInterceptor(): Interceptor {
+        return Interceptor { chain ->
+            val request = chain.request()
+            val requestHeaders = request.headers
+            for (i in 0 until requestHeaders.size) {
+                Log.d("HEADER", "${requestHeaders.name(i)}: ${requestHeaders.value(i)}")
+            }
+            Log.d("Solicitud", "URL: ${request.url}")
+            Log.d("Solicitud", "Método: ${request.method}")
+            Log.d("Solicitud", "Cuerpo: ${request.body}")
+            val response = chain.proceed(request)
+            val responseBody = response.body?.string()
+            Log.d("Respuesta", "Código: ${response.code}")
+            Log.d("Respuesta", "Cuerpo: $responseBody")
+            response.newBuilder()
+                .body(responseBody?.toResponseBody(response.body?.contentType()))
+                .build()
+        }
+    }
 
+    private val retrofit: Retrofit = Retrofit.Builder()
+        .addConverterFactory(SimpleXmlConverterFactory.createNonStrict(Persister(AnnotationStrategy())))
+        .client(client)
+        .baseUrl(BASE_URL)
+        .build()
+
+    val retrofitService: LoginSICEApiService by lazy {
+        retrofit.create(LoginSICEApiService::class.java)
+        }
 }
