@@ -55,19 +55,10 @@ import okhttp3.ResponseBody
 fun PantallaPrincipal(navController: NavController, viewModel: DataViewModel) {
     val context = LocalContext.current
     var user by remember { mutableStateOf("") }
-    var pass by remember {
-        mutableStateOf("")
-    }
-    var isValidUser by remember {
-        mutableStateOf(false)
-    }
-    var isValidPass by remember {
-        mutableStateOf(false)
-    }
-    var passVisible by remember {
-        mutableStateOf(false)
-    }
-
+    var pass by remember { mutableStateOf("") }
+    var isValidUser by remember { mutableStateOf(false) }
+    var isValidPass by remember { mutableStateOf(false) }
+    var passVisible by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
             .fillMaxSize()

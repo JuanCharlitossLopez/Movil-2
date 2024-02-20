@@ -35,7 +35,6 @@ fun mostrarDatos(navController: NavController, viewModel: DataViewModel) {
             Card(modifier = Modifier.padding(30.dp).size(600.dp,45.dp)){
                 Text(text = "Matrícula: ${alumnoAcademicoResult.matricula}",modifier = Modifier.padding(10.dp).align(alignment = Alignment.CenterHorizontally))
             }
-
             Card(modifier = Modifier.padding(30.dp).size(600.dp,45.dp)){
                 Text(text = "Carrera: ${alumnoAcademicoResult.carrera}",modifier = Modifier.padding(10.dp).align(alignment = Alignment.CenterHorizontally))
             }
