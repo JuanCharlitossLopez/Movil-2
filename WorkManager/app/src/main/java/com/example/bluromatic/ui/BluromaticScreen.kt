@@ -87,7 +87,7 @@ fun BluromaticScreen(blurViewModel: BlurViewModel = viewModel(factory = BlurView
             blurUiState = uiState,
             blurAmountOptions = blurViewModel.blurAmount,
             applyBlur = blurViewModel::applyBlur,
-            cancelWork = {},
+            cancelWork = blurViewModel::cancelWork,
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
                 .padding(dimensionResource(R.dimen.padding_medium))
