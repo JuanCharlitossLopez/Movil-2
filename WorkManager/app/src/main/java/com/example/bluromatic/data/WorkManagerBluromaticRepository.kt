@@ -34,6 +34,7 @@ import androidx.work.ExistingWorkPolicy
 import com.example.bluromatic.IMAGE_MANIPULATION_WORK_NAME
 import com.example.bluromatic.TAG_OUTPUT
 import androidx.lifecycle.asFlow
+import androidx.work.Constraints
 import kotlinx.coroutines.flow.mapNotNull
 
 
@@ -68,8 +69,14 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
         // Add WorkRequest to blur the image
         val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
 
+        val constraints = Constraints.Builder()
+            .setRequiresBatteryNotLow(true)
+            .build()
+
         // Input the Uri for the blur operation along with the blur level
         blurBuilder.setInputData(createInputDataForWorkRequest(blurLevel, imageUri))
+        // Mandar llamar
+        blurBuilder.setConstraints(constraints)
 
         continuation = continuation.then(blurBuilder.build())
 
@@ -89,6 +96,9 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
     override fun cancelWork() {
         workManager.cancelUniqueWork(IMAGE_MANIPULATION_WORK_NAME)
     }
+
+    //Constrains para Baja bateria
+
 
     /**
      * Creates the input data bundle which includes the blur level to
