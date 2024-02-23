@@ -66,6 +66,12 @@ android {
 }
 
 dependencies {
+    // Espresso
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    // Junit
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    // Work testing
+    androidTestImplementation("androidx.work:work-testing:2.8.1")
 
     implementation(platform("androidx.compose:compose-bom:2023.10.00"))
     implementation("androidx.activity:activity-compose:1.8.0")
