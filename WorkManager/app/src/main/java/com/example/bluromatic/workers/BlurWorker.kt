@@ -61,12 +61,9 @@ class BlurWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, 
                 val picture = BitmapFactory.decodeStream(
                     resolver.openInputStream(Uri.parse(resourceUri))
                 )
-
                 val output = blurBitmap(picture, blurLevel)
-
                 // Write bitmap to a temp file
                 val outputUri = writeBitmapToFile(applicationContext, output)
-
                 val outputData = workDataOf(KEY_IMAGE_URI to outputUri.toString())
 
                 Result.success(outputData)
