@@ -6,9 +6,12 @@ import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.evaluacion_u1.data.RetrofitClient
 import com.example.evaluacion_u1.model.CargaAcademicaItem
@@ -32,27 +36,58 @@ import retrofit2.Response
 @Composable
 fun CargaAcademica(navController: NavController, viewModel: DataViewModel) {
     val CargaByAlumno = viewModel.CargaByAlumno
-
+    Text(
+        text = "Carga academica\n ",
+        modifier = Modifier
+            .padding(horizontal =  80.dp),
+        fontSize = 24.sp
+    )
     if (CargaByAlumno != null) {
-        Column {
-            CargaByAlumno.forEach { cargaAcademicaItem ->
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            items(CargaByAlumno) { cargaAcademicaItem ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
+                        .padding(vertical = 40.dp)
                 ) {
-                    Text(
-                        text = "Materia: ${cargaAcademicaItem.materia}",
-                        modifier = Modifier.weight(1f)
-                    )
-                    Text(
-                        text = "Créditos: ${cargaAcademicaItem.creditosMateria}",
-                        modifier = Modifier.weight(1f)
-                    )
-                    Text(
-                        text = "Estado: ${cargaAcademicaItem.estadoMateria}",
-                        modifier = Modifier.weight(1f)
-                    )
+                    Card(modifier = Modifier
+                        .padding(horizontal = 10.dp)
+                        .padding(vertical = 1.dp)
+                        .size(1050.dp, 200.dp)){
+                        Text(
+                            text = "Materia: ${cargaAcademicaItem.materia}",
+                            modifier = Modifier.weight(1f)
+                        )
+                        Text(
+                            text = "Maestro: ${cargaAcademicaItem.docente}",
+                            modifier = Modifier.weight(1f)
+                        )
+                        Text(
+                            text = "Grupo: ${cargaAcademicaItem.grupo}",
+                            modifier = Modifier.weight(1f)
+                        )
+                        Text(
+                            text = "Lunes: ${cargaAcademicaItem.lunes}"
+                        )
+                        Text(
+                            text = "Martes: ${cargaAcademicaItem.martes}",
+                            modifier = Modifier.weight(1f)
+                        )
+                        Text(
+                            text = "Miercoles: ${cargaAcademicaItem.miercoles}",
+                            modifier = Modifier.weight(1f)
+                        )
+                        Text(
+                            text = "Jueves: ${cargaAcademicaItem.jueves}",
+                            modifier = Modifier.weight(1f)
+                        )
+                        Text(
+                            text = "Viernes: ${cargaAcademicaItem.viernes}",
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
                 }
             }
         }
