@@ -80,7 +80,6 @@ fun mostrarDatos(navController: NavController, viewModel: DataViewModel) {
                     .align(alignment = Alignment.CenterHorizontally))
             }
             // Agrega más campos aquí
-            Spacer(modifier = Modifier.padding(30.dp))
             Button(modifier = Modifier.align(Alignment.CenterHorizontally),
                 onClick = { navController.popBackStack() }) {
                 Text(text = "Cerrar sesion")
@@ -91,6 +90,12 @@ fun mostrarDatos(navController: NavController, viewModel: DataViewModel) {
                     authenticate(context, user, pass, navController, viewModel)
                     AppScreens.cargaAcademic }) {
                 Text(text = "Carga Academica")
+            }
+            Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+                onClick = {
+                    authenticate2(context, user, pass, navController, viewModel)
+                    AppScreens.kardex }) {
+                Text(text = "Kardex")
             }
         }
     } else {
@@ -130,6 +135,38 @@ private fun authenticate(
     })
 }
 
+private fun authenticate2(
+    context: Context,
+    matricula: String,
+    contrasenia: String,
+    navController: NavController,
+    viewModel: DataViewModel
+) {
+    val bodyLogin = loginRequestBody(matricula, contrasenia)
+    val service = RetrofitClient(context).retrofitService
+    service.login(bodyLogin).enqueue(object : Callback<ResponseBody> {
+        override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+            if (response.isSuccessful) {
+                Log.w("exito", "se obtuvo el perfil")
+                //getAcademicProfile(context, navController, viewModel)
+                //getCargaAcademica(context,navController,viewModel)
+                getAllKardex(context,navController,viewModel)
+            } else {
+                showError(
+                    context,
+                    "Error en la autenticación. Código de respuesta: ${response.code()}"
+                )
+            }
+        }
+
+        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+            t.printStackTrace()
+            showError(context, "Error en la solicitud")
+        }
+    })
+}
+
 private fun showError(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
+

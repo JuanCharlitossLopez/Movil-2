@@ -19,6 +19,7 @@ import android.content.Context
 import android.util.Log
 import com.example.evaluacion_u1.network.AddCookiesInterceptor
 import com.example.evaluacion_u1.network.CargaAcademicaApiService
+import com.example.evaluacion_u1.network.KardexApiService
 import com.example.evaluacion_u1.network.LoginSICEApiService
 import com.example.evaluacion_u1.network.ReceivedCookiesInterceptor
 import okhttp3.Interceptor
@@ -71,4 +72,8 @@ class RetrofitClient(context: Context) {
     val retrofitService2: CargaAcademicaApiService by lazy {
         retrofit.create(CargaAcademicaApiService::class.java)
     }
+    val retrofitService3: KardexApiService by lazy {
+        retrofit.create(KardexApiService::class.java)
+    }
+
 }
