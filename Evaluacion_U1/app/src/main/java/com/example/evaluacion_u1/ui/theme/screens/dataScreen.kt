@@ -97,6 +97,12 @@ fun mostrarDatos(navController: NavController, viewModel: DataViewModel) {
                     AppScreens.kardex }) {
                 Text(text = "Kardex")
             }
+            Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+                onClick = {
+                    authenticate3(context, user, pass, navController, viewModel)
+                    AppScreens.CalifByUnit }) {
+                Text(text = "Calif Por unidad")
+            }
         }
     } else {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -151,6 +157,37 @@ private fun authenticate2(
                 //getAcademicProfile(context, navController, viewModel)
                 //getCargaAcademica(context,navController,viewModel)
                 getAllKardex(context,navController,viewModel)
+            } else {
+                showError(
+                    context,
+                    "Error en la autenticación. Código de respuesta: ${response.code()}"
+                )
+            }
+        }
+
+        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+            t.printStackTrace()
+            showError(context, "Error en la solicitud")
+        }
+    })
+}
+private fun authenticate3(
+    context: Context,
+    matricula: String,
+    contrasenia: String,
+    navController: NavController,
+    viewModel: DataViewModel
+) {
+    val bodyLogin = loginRequestBody(matricula, contrasenia)
+    val service = RetrofitClient(context).retrofitService
+    service.login(bodyLogin).enqueue(object : Callback<ResponseBody> {
+        override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+            if (response.isSuccessful) {
+                Log.w("exito", "se obtuvo el perfil")
+                //getAcademicProfile(context, navController, viewModel)
+                //getCargaAcademica(context,navController,viewModel)
+                //getAllKardex(context,navController,viewModel)
+                getCalifByUnit(context,navController,viewModel)
             } else {
                 showError(
                     context,

@@ -8,6 +8,7 @@ import com.example.evaluacion_u1.network.KardexApiService
 import com.example.evaluacion_u1.ui.theme.screens.CargaAcademica
 import com.example.evaluacion_u1.ui.theme.screens.DataViewModel
 import com.example.evaluacion_u1.ui.theme.screens.PantallaPrincipal
+import com.example.evaluacion_u1.ui.theme.screens.mostrarCalifByUnit
 import com.example.evaluacion_u1.ui.theme.screens.mostrarDatos
 import com.example.evaluacion_u1.ui.theme.screens.mostrarKardex
 
@@ -20,6 +21,7 @@ fun AppNavigation(){
         composable(route="data"){ mostrarDatos(navController = navController, viewModel= viewModel)}
         composable(route = "carga"){CargaAcademica(navController = navController, viewModel = viewModel)}
         composable(route = "kardex"){mostrarKardex(navController = navController, viewModel = viewModel)}
+        composable(route = "califByUnidad"){mostrarCalifByUnit(navController = navController, viewModel = viewModel)}
 
     }
 

@@ -6,4 +6,6 @@ sealed class AppScreens (val route: String){
     object cargaAcademic : AppScreens(route = "cargaAcedemic")
 
     object kardex: AppScreens(route = "kardex")
+    object CalifByUnit : AppScreens(route = "califByUnidad")
+
 }

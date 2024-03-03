@@ -18,6 +18,7 @@ package com.example.evaluacion_u1.data
 import android.content.Context
 import android.util.Log
 import com.example.evaluacion_u1.network.AddCookiesInterceptor
+import com.example.evaluacion_u1.network.CalifByUnidades
 import com.example.evaluacion_u1.network.CargaAcademicaApiService
 import com.example.evaluacion_u1.network.KardexApiService
 import com.example.evaluacion_u1.network.LoginSICEApiService
@@ -75,5 +76,7 @@ class RetrofitClient(context: Context) {
     val retrofitService3: KardexApiService by lazy {
         retrofit.create(KardexApiService::class.java)
     }
-
+    val retrofitService4: CalifByUnidades by lazy {
+        retrofit.create(CalifByUnidades::class.java)
+    }
 }
