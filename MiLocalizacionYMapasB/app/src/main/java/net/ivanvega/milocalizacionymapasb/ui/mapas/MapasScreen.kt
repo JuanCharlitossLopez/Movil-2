@@ -65,10 +65,14 @@ fun MiPrimerMapa() {
     }
     DibujarMapa()
 }
+
 @Composable
 fun DibujarMapa() {
-    var activado by remember { mutableStateOf(false) }
-    var markerPosition by remember { mutableStateOf(LatLng(0.0, 0.0)) } // Posición inicial del marcador
+    var marker1Position by remember { mutableStateOf(LatLng(0.0, 0.0)) }
+    var marker2Position by remember { mutableStateOf(LatLng(0.0, 0.0)) }
+    var marker1Activated by remember { mutableStateOf(false) }
+    var marker2Activated by remember { mutableStateOf(false) }
+    var drawingEnabled by remember { mutableStateOf(false) } // Nuevo estado para habilitar/deshabilitar la función de dibujo
 
     Box(Modifier.fillMaxSize()) {
         GoogleMap(
@@ -76,24 +80,51 @@ fun DibujarMapa() {
                 GoogleMapOptions().mapId("DEMO_MAP_ID")
             },
             onMapClick = { latLng ->
-                if (activado) {
-                    markerPosition = latLng // Actualizar la posición del marcador al hacer clic en el mapa
+                if (drawingEnabled) {
+                    if (marker1Activated && marker2Activated) {
+                        // Si ambos marcadores están activados, no hacer nada
+                    } else if (marker1Activated) {
+                        // Si el primer marcador está activado, actualizar su posición
+                        marker1Position = sas
+                        marker2Activated = true
+                    } else {
+                        // Si no, actualizar la posición del segundo marcador
+                        marker2Position = latLng
+                        marker1Activated = true
+                    }
                 }
             }
         ) {
-            if (activado) {
-                // Mostrar el marcador solo si está activado
+            if (marker1Activated) {
+                // Mostrar el primer marcador si está activado
                 AdvancedMarker(
-                    state = MarkerState(position = markerPosition),
-                    title = "Marcador"
+                    state = MarkerState(position = marker1Position),
+                    title = "Marcador 1"
+                )
+            }
+            if (marker2Activated) {
+                // Mostrar el segundo marcador si está activado
+                AdvancedMarker(
+                    state = MarkerState(position = marker2Position),
+                    title = "Marcador 2"
                 )
             }
         }
         Button(
-            onClick = { activado = !activado },
-            Modifier.align(Alignment.BottomStart)
+            onClick = {
+                drawingEnabled = !drawingEnabled // Alternar entre habilitar y deshabilitar la función de dibujo
+                if (!drawingEnabled) {
+                    // Si la función de dibujo está desactivada, restablecer la activación de los marcadores y sus posiciones
+                    marker1Activated = false
+                    marker2Activated = false
+                    marker1Position = LatLng(0.0, 0.0)
+                    marker2Position = LatLng(0.0, 0.0)
+                }
+            },
+            Modifier.align(Alignment.BottomCenter)
         ) {
-            Text(text = if (activado) "Desactivar" else "Activar")
+            Text(text = if (drawingEnabled) "Desactivar dibujo" else "Activar dibujo")
         }
     }
 }
+
