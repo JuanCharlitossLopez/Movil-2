@@ -39,9 +39,6 @@ fun MiPrimerMapa() {
     }
 
     Box(Modifier.fillMaxSize()) {
-
-
-
         GoogleMap(
             modifier = Modifier.matchParentSize(),
             properties = properties,
@@ -53,85 +50,7 @@ fun MiPrimerMapa() {
                 title = "Mexico City",
                 snippet = "Marker in Angel de la independencia"
             )
-
         }
 
-        Switch(
-            checked = uiSettings.zoomControlsEnabled,
-            onCheckedChange = {
-                uiSettings = uiSettings.copy(zoomControlsEnabled = it)
-            }
-        )
     }
-    DibujarMapa()
-}
-
-@Composable
-fun DibujarMapa() {
-    var marker1Position by remember { mutableStateOf(LatLng(0.0, 0.0)) }
-    var marker2Position by remember { mutableStateOf(LatLng(0.0, 0.0)) }
-    var marker1Activated by remember { mutableStateOf(false) }
-    var marker2Activated by remember { mutableStateOf(false) }
-    var drawingEnabled by remember { mutableStateOf(false) } // Nuevo estado para habilitar/deshabilitar la función de dibujo
-
-    Box(Modifier.fillMaxSize()) {
-        GoogleMap(
-            googleMapOptionsFactory = {
-                GoogleMapOptions().mapId("DEMO_MAP_ID")
-            },
-            onMapClick = { latLng ->
-                if (drawingEnabled) {
-                    if (marker1Activated && marker2Activated) {
-                        // Si ambos marcadores están activados, no hacer nada
-                    } else if (marker1Activated) {
-                        // Si el primer marcador está activado, actualizar su posición
-                        marker1Position = latLng
-                        marker2Activated = true
-                    } else {
-                        // Si no, actualizar la posición del segundo marcador
-                        marker2Position = latLng
-                        marker1Activated = true
-                    }
-                }
-            }
-        ) {
-            if (marker1Activated) {
-                // Mostrar el primer marcador si está activado
-                AdvancedMarker(
-                    state = MarkerState(position = marker1Position),
-                    title = "Marcador 1"
-                )
-            }
-            if (marker2Activated) {
-                // Mostrar el segundo marcador si está activado
-                AdvancedMarker(
-                    state = MarkerState(position = marker2Position),
-                    title = "Marcador 2"
-                )
-            }
-        }
-        Button(
-            onClick = {
-                drawingEnabled = !drawingEnabled // Alternar entre habilitar y deshabilitar la función de dibujo
-                if (!drawingEnabled) {
-                    // Si la función de dibujo está desactivada, restablecer la activación de los marcadores y sus posiciones
-                    marker1Activated = false
-                    marker2Activated = false
-                    marker1Position = LatLng(0.0, 0.0)
-                    marker2Position = LatLng(0.0, 0.0)
-                }
-            },
-            Modifier.align(Alignment.BottomCenter)
-        ) {
-            Text(text = if (drawingEnabled) "Desactivar dibujo" else "Activar dibujo")
-        }
-    }
-}
-
-
-@Composable
-fun Recomposing_elements() {
-   // val markerState = rememberMarkerState(position = singapore)
-
-
 }
