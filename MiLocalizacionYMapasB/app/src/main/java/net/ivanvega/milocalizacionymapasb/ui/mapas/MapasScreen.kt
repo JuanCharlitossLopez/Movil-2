@@ -85,7 +85,7 @@ fun DibujarMapa() {
                         // Si ambos marcadores están activados, no hacer nada
                     } else if (marker1Activated) {
                         // Si el primer marcador está activado, actualizar su posición
-                        marker1Position = sas
+                        marker1Position = latLng
                         marker2Activated = true
                     } else {
                         // Si no, actualizar la posición del segundo marcador
@@ -128,3 +128,10 @@ fun DibujarMapa() {
     }
 }
 
+
+@Composable
+fun Recomposing_elements() {
+   // val markerState = rememberMarkerState(position = singapore)
+
+
+}
