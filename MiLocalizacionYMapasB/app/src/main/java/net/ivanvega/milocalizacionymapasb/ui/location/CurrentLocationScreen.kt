@@ -45,11 +45,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 @SuppressLint("MissingPermission")
-/*@Sample(
-    name = "Location - Getting Current Location",
-    description = "This Sample demonstrate how to request of current location",
-    documentation = "https://developer.android.com/training/location/retrieve-current",
-)*/
 @Composable
 fun CurrentLocationScreen() {
     val permissions = listOf(
