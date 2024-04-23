@@ -16,6 +16,7 @@ import com.example.platform.location.permission.LocationPermissionScreen
 import net.ivanvega.milocalizacionymapasb.ui.location.CurrentLocationScreen
 import net.ivanvega.milocalizacionymapasb.ui.mapas.CrearMapas2
 import net.ivanvega.milocalizacionymapasb.ui.mapas.DrawingMap
+import net.ivanvega.milocalizacionymapasb.ui.mapas.GoogleMapView
 import net.ivanvega.milocalizacionymapasb.ui.mapas.MiPrimerMapa
 import net.ivanvega.milocalizacionymapasb.ui.mapas.RecoposingeElements
 import net.ivanvega.milocalizacionymapasb.ui.mapas.StreetView
@@ -35,12 +36,13 @@ class MainActivity : ComponentActivity() {
                         //LocationPermissionScreen()
                         //CurrentLocationScreen()
                         //LocationUpdatesScreen()
-                        MiPrimerMapa()
+                       // MiPrimerMapa()
                        // DrawingMap()
                        //RecoposingeElements()
                       // CurrentLocationScreen()
                         //StreetView()
-                        CrearMapas2()
+                        //CrearMapas2()
+                        GoogleMapView()
                     }
                 }
             }
