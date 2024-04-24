@@ -1,6 +1,7 @@
 package net.ivanvega.milocalizacionymapasb.ui.mapas
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.AdvancedMarker
@@ -9,7 +10,7 @@ import com.google.maps.android.compose.MarkerState
 
 
 @Composable
-fun DrawingMap(){
+fun DrawingMap(navController: NavController){
     GoogleMap(
         googleMapOptionsFactory = {
             GoogleMapOptions().mapId("DEMO_MAP_ID")

@@ -2,13 +2,14 @@ package net.ivanvega.milocalizacionymapasb.ui.mapas
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.navigation.NavController
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.rememberMarkerState
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
 
 @Composable
-fun RecoposingeElements(){
+fun RecoposingeElements(navController: NavController){
     val singapore = LatLng(1.3521, 103.8198) // Latitud y longitud
     val markerState = rememberMarkerState(position = singapore)
 

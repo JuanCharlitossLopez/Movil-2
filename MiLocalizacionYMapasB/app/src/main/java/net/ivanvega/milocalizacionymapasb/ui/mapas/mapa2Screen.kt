@@ -8,6 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -19,7 +20,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 
 
 @Composable
-fun CrearMapas2(){
+fun CrearMapas2(navController: NavController){
     val singapore = LatLng(20.13940326357506, -101.15073142883558)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(singapore, 10f)

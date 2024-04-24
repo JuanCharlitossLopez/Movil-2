@@ -6,13 +6,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.navigation.NavController
 import com.google.android.gms.maps.StreetViewPanoramaOptions
 import com.google.android.gms.maps.StreetViewPanoramaView
 import com.google.android.gms.maps.model.LatLng
 
 
 @Composable
-fun StreetView() {
+fun StreetView(navController: NavController) {
     val context = LocalContext.current
     val svpView = remember {
         StreetViewPanoramaView(context, StreetViewPanoramaOptions()

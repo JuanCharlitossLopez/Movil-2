@@ -4,11 +4,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavController
 import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerInfoWindowContent
 
 @Composable
-fun CustomigMarkersInfo(){
+fun CustomigMarkersInfo(navController: NavController){
     MarkerInfoWindowContent(
         //...
     ) { marker ->

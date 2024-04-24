@@ -5,14 +5,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.platform.location.locationupdates.LocationUpdatesScreen
 import com.example.platform.location.permission.LocationPermissionScreen
+import net.ivanvega.milocalizacionymapasb.Navegacion.AppNavegacion
 import net.ivanvega.milocalizacionymapasb.ui.location.CurrentLocationScreen
 import net.ivanvega.milocalizacionymapasb.ui.mapas.CrearMapas2
 import net.ivanvega.milocalizacionymapasb.ui.mapas.DrawingMap
@@ -36,13 +41,15 @@ class MainActivity : ComponentActivity() {
                         //LocationPermissionScreen()
                         //CurrentLocationScreen()
                         //LocationUpdatesScreen()
-                       // MiPrimerMapa()
-                       // DrawingMap()
+
+                        //MiPrimerMapa()
+                       //DrawingMap()
                        //RecoposingeElements()
                       // CurrentLocationScreen()
                         //StreetView()
                         //CrearMapas2()
-                        GoogleMapView()
+                        //GoogleMapView()
+                        AppNavegacion()
                     }
                 }
             }
@@ -65,3 +72,6 @@ fun GreetingPreview() {
         Greeting("Android")
     }
 }
+
+
+
