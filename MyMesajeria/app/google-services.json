@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "630862602451",
+    "project_id": "movil2firebase",
+    "storage_bucket": "movil2firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630862602451:android:550f8f3a3e0909bfd83426",
+        "android_client_info": {
+          "package_name": "com.example.mymesajeria"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRjLe9WoTXMBySP1uUAIxT4-8I_Oacfyg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
